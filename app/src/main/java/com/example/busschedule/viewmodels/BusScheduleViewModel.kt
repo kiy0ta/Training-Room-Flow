@@ -3,6 +3,7 @@ package com.example.busschedule.viewmodels
 import androidx.lifecycle.ViewModel
 import com.example.busschedule.database.schedule.Schedule
 import com.example.busschedule.database.schedule.ScheduleDao
+import kotlinx.coroutines.flow.Flow
 
 /**
  * ViewModel クラスは、アプリの UI に関連するデータを格納するために使用されます。
@@ -17,7 +18,7 @@ import com.example.busschedule.database.schedule.ScheduleDao
  * 大規模なアプリでは、フラグメントごとに別々のビューモデルを使用することをおすすめします。
  */
 class BusScheduleViewModel(private val scheduleDao: ScheduleDao) : ViewModel() {
-    fun fullSchedule(): List<Schedule> = scheduleDao.getAll()
-    fun scheduleForStopName(stopName: String): List<Schedule> =
+    fun fullSchedule(): Flow<List<Schedule>> = scheduleDao.getAll()
+    fun scheduleForStopName(stopName: String): Flow<List<Schedule>> =
         scheduleDao.getByStopName(stopName = stopName)
 }
