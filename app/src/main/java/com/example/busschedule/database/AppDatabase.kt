@@ -32,7 +32,6 @@ abstract class AppDatabase : RoomDatabase() {
 
         // これなんでつけないと動かないの？
         // なんでAppDatabase::class.javaでjavaを参照するの？
-        // そもそもclass参照って何？(InternalCoroutinesApi::class)
         @OptIn(InternalCoroutinesApi::class)
         fun getDatabase(context: Context): AppDatabase {
             // synchronized >  internal in coroutines API

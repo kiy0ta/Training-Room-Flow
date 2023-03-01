@@ -32,6 +32,17 @@ import kotlinx.coroutines.launch
 
 class FullScheduleFragment : Fragment() {
 
+    /**
+     * by viewModels や by activityViewModels の中で、
+     * ViewModelProvider経由でViewModelを取得してるので直接インスタンス化するのとは全く別物です。
+     *
+     * 今回は直接インスタンス化する代わりに、
+     * ビューモデル オブジェクトをインスタンス化する、ファクトリーというクラスを実装します。
+     *
+     * フラグメントで直接ViewModelをインスタンス化する場合、
+     * フラグメント オブジェクトがすべてのメモリ管理を含めて何もかも処理する必要がありますが、
+     * これはアプリのコードで行うべきことの範囲を超えています。x
+     */
     private val viewModel: BusScheduleViewModel by activityViewModels {
         BusScheduleViewModelFactory(
             (activity?.application as BusScheduleApplication).database.scheduleDao()
