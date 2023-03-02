@@ -41,10 +41,17 @@ class FullScheduleFragment : Fragment() {
      *
      * フラグメントで直接ViewModelをインスタンス化する場合、
      * フラグメント オブジェクトがすべてのメモリ管理を含めて何もかも処理する必要がありますが、
-     * これはアプリのコードで行うべきことの範囲を超えています。x
+     * これはアプリのコードで行うべきことの範囲を超えています。
      */
     private val viewModel: BusScheduleViewModel by activityViewModels {
         BusScheduleViewModelFactory(
+            /**
+             * (1) これはBusScheduleApplicationクラスのメンバーフィールドへのアクセスです
+             * (activity?.application as BusScheduleApplication).database.scheduleDao()
+             *
+             * (2) これはクラスのstaticフィールドへのアクセス（元のソースには存在しない）
+             * BusScheduleApplication.database.scheduleDao()
+             */
             (activity?.application as BusScheduleApplication).database.scheduleDao()
         )
     }

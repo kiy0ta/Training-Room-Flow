@@ -30,14 +30,14 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        // これなんでつけないと動かないの？
-        // なんでAppDatabase::class.javaでjavaを参照するの？
         @OptIn(InternalCoroutinesApi::class)
         fun getDatabase(context: Context): AppDatabase {
-            // synchronized >  internal in coroutines API
-            // データベースの既存のインスタンスを返すか（すでに存在する場合）、必要に応じてデータベースを新規作成します。
-            // このアプリでは、データが事前入力されているため、createFromAsset() を呼び出して既存のデータを読み込むこともできます。
-            // database/bus_schedule.db ファイルは、プロジェクトの assets.database パッケージにあります。
+            /**
+             * synchronized >  internal in coroutines API
+             * データベースの既存のインスタンスを返すか（すでに存在する場合）、必要に応じてデータベースを新規作成します。
+             * このアプリでは、データが事前入力されているため、createFromAsset() を呼び出して既存のデータを読み込むこともできます。
+             * database/bus_schedule.db ファイルは、プロジェクトの assets.database パッケージにあります。
+             */
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context,

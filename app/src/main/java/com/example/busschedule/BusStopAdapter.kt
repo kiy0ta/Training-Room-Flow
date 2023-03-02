@@ -28,8 +28,12 @@ import java.util.Date
 class BusStopAdapter(private val onItemClicked: (Schedule) -> Unit) :
     ListAdapter<Schedule, BusStopAdapter.BusStopViewHolder>(DiffCallback) {
 
-    // これはどうしてcompanion objectに定義するのか？
     companion object {
+        /**
+         * このDiffCallbackは生成時に外部からの変数が必要無いので、
+         * 一度生成すればあとは使い回してもいいですなので、
+         * 共通で使うcompanion objectとして定義されている、ということだと思います
+         */
         private val DiffCallback = object : DiffUtil.ItemCallback<Schedule>() {
             /**
              * areItemsTheSame() は、ID のみを確認することで、
